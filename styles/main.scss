@@ -1,0 +1,33 @@
+@import "~jspsych/css/jspsych.css";
+
+/* Disable caret browsing */
+* {
+  -webkit-user-select: none;  /* Chrome all / Safari all */
+  -moz-user-select: none;     /* Firefox all */
+  -ms-user-select: none;      /* IE 10+ */
+   user-select: none;      
+}
+
+.jspsych-display-element {
+  background-color: #ffffff;
+}
+
+
+.stimulus {
+  font-size: 3rem;
+}
+
+
+/* Some trials trying to change css classes */
+
+.jspsych-btn:hover {
+  background-color: #ddd;
+  border-color: #000;
+  transition: all ease;
+}
+
+.jspsych-btn:active {
+  background-color: #bbb;
+  border-color: #000;
+  transition: all ease;
+}

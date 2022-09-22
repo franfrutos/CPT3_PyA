@@ -1,0 +1,21 @@
+{
+  "private": true,
+  "scripts": {
+    "jspsych": "jspsych -e experiment",
+    "start": "npm run jspsych -- run",
+    "build": "npm run jspsych -- build",
+    "jatos": "npm run jspsych -- build --jatos"
+  },
+  "dependencies": {
+    "@jspsych/plugin-call-function": "^1.1.1",
+    "@jspsych/plugin-fullscreen": "^1.1.1",
+    "@jspsych/plugin-html-button-response": "^1.1.1",
+    "@jspsych/plugin-html-keyboard-response": "^1.1.1",
+    "@jspsych/plugin-preload": "^1.1.1",
+    "jspsych": "^7.2.3"
+  },
+  "devDependencies": {
+    "jspsych-builder": "^4.3.1"
+  },
+  "browserslist": ">0.25%, not dead"
+}
