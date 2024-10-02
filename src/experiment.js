@@ -1,7 +1,7 @@
 /**
  * @title CPT3
  * @description A experiment used to measure different dimensions of sustained attention. Created for a class assesment in "perception and attention".
- * @version 1.0.0
+ * @version 1.1.0
  *
  * @assets assets/
  */
@@ -50,7 +50,7 @@ export async function run({ assetPaths, input = {}, environment, title, version 
   jsPsych.data.addProperties({ID: ID});
 
   // Collecting trial number and recording the last block when data were append to jatos
-  let [Trial_num, last_block_update] = [0, 0];
+  let [Trial_num, last_block_update] = [0, 0]; 
 
   // Function to gather critical information on each trial
   const processData = () => {

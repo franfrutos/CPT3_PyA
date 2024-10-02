@@ -5,6 +5,15 @@ const letters = {
 }
 
 // Useful functions:
+
+const shuffle = (array: string[]) => { 
+    for (let i = array.length - 1; i > 0; i--) { 
+      const j = Math.floor(Math.random() * (i + 1)); 
+      [array[i], array[j]] = [array[j], array[i]]; 
+    } 
+    return array; 
+  }; 
+
 const randomIndex = (min = 0, max= letters.target.length -1, no?: number[]) => {
     let ind = Math.floor(Math.random()* (max - min + 1) + min);
     if (no) {
@@ -45,58 +54,29 @@ const shuffleISI = () => {
 };
 
 
-const asignDistractor = (Block: number) => {
- let scope = [(Block*20)-20, (Block*20)-1]
- let ind1 = randomIndex(...scope);
- let ind2 = randomIndex(...scope);
- while(ind2 === ind1) {
-    ind2 = randomIndex(...scope);
- };
- exp_list[ind1]['stimulus'] = "X"
- exp_list[ind2]['stimulus'] = "X"
- exp_list[ind1]['correct_response'] = null
- exp_list[ind2]['correct_response'] = null
-
-}
-
 const ISIarr = shuffleISI();
+let rand_letters: string[];
+console.log(ISIarr);
 
 export let exp_list: { stimulus: string; correct_response: string | null; ISI: number; Block: number }[] = [];
 
-let block_num = 0;
 
-for (let i = 0; i < 20*19; i++) {
-    let ind = randomIndex();
-    block_num = (i % 20 == 0) ? Math.floor(i/20): block_num;
-    exp_list.push({
-        stimulus: letters.target[ind],
-        correct_response:' ',
-        ISI: (block_num == 0) ? 1000 : ISIarr[block_num - 1],
-        Block: block_num,
-    })
+for (let j = 0; j < 19; j ++) {
+    rand_letters = shuffle(letters.target).slice(0, 20); // Select 19 random letters
+    rand_letters[0] = "X"; rand_letters[1] = "X";  // add two distractors per block
+    rand_letters = shuffle(rand_letters); // shuffle the entire array
+    console.log(rand_letters);
+    for (let i = 0; i < 20; i++) {
+        console.log(ISIarr[j-1]);
+        exp_list.push({
+            stimulus: rand_letters[i],
+            correct_response:(rand_letters[i] != "X")?' ':null,
+            ISI: (j == 0) ? 1000 : ISIarr[j - 1],
+            Block: j,
+        })
+    };
 };
 
-for (let i = 1; i <= 19; i++) {
-    asignDistractor(i);
-}
 
-/* Example code to show data in a table format */
 
-// export const show_results = (csv_jsPsych: string) => {
-//     // csv rows are separated by \r\n
-//     const csv = csv_jsPsych.split("\r\n");
-//     if (csv.indexOf("") == csv.length - 1) {
-//         csv.pop();
-//     }
-//     let table = document.createElement('table');
-//     for (let row of csv) {
-//         let tr = table.insertRow();
-//         for (let col of row.split(",")) {
-//             // Data is embeded in ""
-//             col = col.replace(/"/g, '');
-//             let td = tr.insertCell();
-//             td.innerHTML = col;
-//         }
-//     }
-//     return table;
-// };
+console.log(exp_list);
